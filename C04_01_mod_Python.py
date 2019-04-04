@@ -41,7 +41,7 @@ def Trace_droite(xA,yA,xB,yB,place=True):
     plt.gca().set_ylim(miny,maxy)
     plt.xticks(np.arange(minx,maxx,1))
     plt.yticks(np.arange(miny,maxy,1))
-    ax.grid(color='r', linestyle='-', linewidth=2)
+    ax.grid(color='b', linestyle='-', linewidth=1)
     ax.spines['left'].set_position('zero')
     ax.spines['bottom'].set_position('zero')
     ax.spines['right'].set_color('none')
