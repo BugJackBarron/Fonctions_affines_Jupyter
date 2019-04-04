@@ -107,7 +107,8 @@ def _Trouve_Coeff(totalquestion,taux,trace=True):
             while True :
                 xB,yB=random.randint(-10,10),random.randint(-10,10)
                 if xA!=xB: break
-            display(Latex("Score :{:.0%}".format(score/totalquestion)))
+            display(Latex("""Nombre de questions : {quest}
+            Score :{sco:.0%}""".format(quest=nbquestion,sco=score/totalquestion)))
             if trace : Trace_droite(xA,yA,xB,yB)
             display(Latex(" Déterminer le coefficient directeur de la droite (AB) avec A({xA};{yA}) et B({xB};{yB}) :".format(xA=xA,yA=yA,xB=xB,yB=yB)))
             m=fractions.Fraction(input("Le coefficient directeur :"))
