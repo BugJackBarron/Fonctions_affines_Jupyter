@@ -26,7 +26,7 @@ def input_coord(point):
             print("unable to convert data to float")
     except :
         print("something wrong happened...")
-        
+
 def Trace_droite(xA,yA,xB,yB,place=True):
     fig=plt.figure()
     ax = fig.add_subplot(1, 1, 1)
@@ -111,7 +111,13 @@ def _Trouve_Coeff(totalquestion,taux,trace=True):
             Score :{sco:.0%}""".format(quest=nbquestion,sco=score/totalquestion)))
             if trace : Trace_droite(xA,yA,xB,yB)
             display(Latex(" Déterminer le coefficient directeur de la droite (AB) avec A({xA};{yA}) et B({xB};{yB}) :".format(xA=xA,yA=yA,xB=xB,yB=yB)))
-            m=fractions.Fraction(input("Le coefficient directeur :"))
+            while True :
+                try :
+                    m=fractions.Fraction(input("Le coefficient directeur :"))
+                    break
+                except :
+                    display((Latex("Saisie incorrecte ! Avez vous simplifié ?")))
+                    
             
             gr=fractions.Fraction((yB-yA),(xB-xA))
             
@@ -151,7 +157,8 @@ def Exo_point(totalquestion, taux,trace=True):
                 b=yB-a*xB
             except :
                 pass
-            display(Latex("Score :{:.0%}".format(score/totalquestion)))
+            display(Latex("""Nombre de questions : {quest}
+            Score :{sco:.0%}""".format(quest=nbquestion,sco=score/totalquestion)))
             if trace :Trace_droite(xA,yA,xB,yB,place=False)
             display(Latex("Déterminer les coordonnées d'un point B de cette droite sachant que le point A a pour coordonnées"+
                           "({xA};{yA}) et que le coefficient directeur de cette droite est {c}"
@@ -165,7 +172,7 @@ def Exo_point(totalquestion, taux,trace=True):
             if (nbquestion<totalquestion-1) :
                 s=input("Continuer ?")
                 clear_output()
-            elif score>=taux :
+            elif score/totalquestion>=taux :
                 display(Latex("Bravo ! Votre score est de {:.0%}.Vous pouvez passer à l'exercice suivant !".format(score/totalquestion)))
             nbquestion=nbquestion+1
         if score/totalquestion<taux :
