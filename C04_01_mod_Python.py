@@ -14,7 +14,7 @@ import numpy as np
 def input_coord(point):
     """récupère un tuple (x;y) contenant les coordonnées d'un point dont le 
     nom est passé en argument"""
-    coord_txt=input("Donnez des coordonnées au point {} : ".format(point))
+    coord_txt=input("Donnez des coordonnées au point {} :".format(point))
     coord_txt=coord_txt.replace("(","").replace(")","").replace(" ","")
     try :
         return tuple([int(i) for i in coord_txt.split(";")])
@@ -36,7 +36,7 @@ def Trace_droite(xA,yA,xB,yB,place=True):
     #a=fractions.Fraction(yB-yA,xB-xA)
     #b=yB-a*xB
     #miny,maxy=int(a*minx+b),int(a*maxx+b)+1
-    miny,maxy=int(min(yA,yB,0)-2),int(max(yA,yB,0)+2)z
+    miny,maxy=int(min(yA,yB,0)-2),int(max(yA,yB,0)+2)
     
     plt.gca().set_xlim(minx,maxx)
     plt.gca().set_ylim(miny,maxy)
@@ -164,7 +164,7 @@ def Exo_point(totalquestion, taux,trace=True):
             display(Latex("Déterminer les coordonnées d'un point B de cette droite sachant que le point A a pour coordonnées"+
                           "({xA};{yA}) et que le coefficient directeur de cette droite est {c}"
                           .format(xA=xA,yA=yA,c=fractions.Fraction(yB-yA,xB-xA))))
-            repx,repy=input_coord("Donnez les coordonnées du point B :")
+            repx,repy=input_coord("B")
             if repy==a*repx+b :
                 score=score+1
                 display(Latex("Bravo !"))
