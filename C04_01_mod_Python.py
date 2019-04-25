@@ -10,6 +10,7 @@ import  random
 import matplotlib.pyplot as plt
 import fractions
 import numpy as np
+import math
 
 def input_coord(point):
     """récupère un tuple (x;y) contenant les coordonnées d'un point dont le 
@@ -98,6 +99,26 @@ def Exemples_calculs():
             break
         else :
             clear_output()
+            
+def _input_Fraction(texte):
+    """Verifie si une saisie uest une fraction irréductible ou un entier"""
+    inp=input(texte)
+    try :
+        if "/" in inp :
+            n,d=map(int,inp.split("/"))
+        else :
+            n,d=int(inp),1
+        if math.gcd(abs(n),abs(d))!=1 :
+            print("La fraction saisie n'est pas simplifiée. Recommencez svp !")
+            return _input_Fraction(texte)
+        elif d<0 :
+            print("Attention au signe du dénominateur !")
+            return _input_Fraction(texte)
+        else :
+            return "{}/{}".format(n,d)
+    except :
+        print("Saisie incorrecte ! Recommencez svp !")
+        return _input_Fraction(texte)
 
 def _Trouve_Coeff(totalquestion,taux,trace=True):
     score=0
@@ -114,7 +135,7 @@ def _Trouve_Coeff(totalquestion,taux,trace=True):
             display(Latex(" Déterminer le coefficient directeur de la droite (AB) avec A({xA};{yA}) et B({xB};{yB}) :".format(xA=xA,yA=yA,xB=xB,yB=yB)))
             while True :
                 try :
-                    m=fractions.Fraction(input("Le coefficient directeur :"))
+                    m=fractions.Fraction(_input_Fraction("Donnez le coefficient directeur,sous la forme d'un entier ou d'une fraction simplifiée :"))
                     break
                 except :
                     display((Latex("Saisie incorrecte ! Avez vous simplifié ?")))
@@ -128,14 +149,19 @@ def _Trouve_Coeff(totalquestion,taux,trace=True):
             else :
                 display(Latex("Raté ! La bonne réponse  était {}".format(gr)))
             if (nbquestion<totalquestion-1) :
-                s=input("Continuer ?")
-                clear_output()
+                s=input("Continuer (o) ou  remettre le score à zéro (n) ?")
+                if s.lower() not in ['n','no','non'] :
+                    clear_output()
+                else :
+                    break
             elif score>=taux :
                 display(Latex("Bravo ! Votre score est de {:.0%}.Vous pouvez passer à l'exercice suivant !".format(score/totalquestion)))
             nbquestion=nbquestion+1
         if score/totalquestion<taux :
             display(Latex("Votre score de {:.0%} est insuffisant ! Veuillez recommencer !"
-                .format(score/totalquestion)))
+                .format(score/totalquestion)))        
+            score=0
+            clear_output()
         
     
 
@@ -171,14 +197,19 @@ def Exo_point(totalquestion, taux,trace=True):
             else :
                 display(Latex("Raté ! Une bonne réponse  était B({};{})".format(xB,yB)))
             if (nbquestion<totalquestion-1) :
-                s=input("Continuer ?")
-                clear_output()
+               s=input("Continuer (o) ou  remettre le score à zéro (n) ?")
+               if s.lower() not in ['n','no','non'] :
+                    clear_output()
+               else :
+                    break
             elif score/totalquestion>=taux :
                 display(Latex("Bravo ! Votre score est de {:.0%}.Vous pouvez passer à l'exercice suivant !".format(score/totalquestion)))
             nbquestion=nbquestion+1
         if score/totalquestion<taux :
             display(Latex("Votre score de {:.0%} est insuffisant ! Veuillez recommencer !"
                 .format(score/totalquestion)))
+            score=0
+            clear_output()
         
                 
                 
