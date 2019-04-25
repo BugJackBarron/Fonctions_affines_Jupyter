@@ -19,13 +19,14 @@ def input_coord(point):
     try :
         return tuple([int(i) for i in coord_txt.split(";")])
     except ValueError:
-        print("Les valeurs saisies ne sont pas entières, on obtient donc des float")
         try :
             return tuple([float(i) for i in coord_txt.split(";")])
         except :
             print("unable to convert data to float")
+            return input_coord(point)
     except :
         print("something wrong happened...")
+        return input_coord(point)
 
 def Trace_droite(xA,yA,xB,yB,place=True):
     fig=plt.figure()
@@ -35,7 +36,7 @@ def Trace_droite(xA,yA,xB,yB,place=True):
     #a=fractions.Fraction(yB-yA,xB-xA)
     #b=yB-a*xB
     #miny,maxy=int(a*minx+b),int(a*maxx+b)+1
-    miny,maxy=int(min(yA,yB,0)-2),int(max(yA,yB,0)+2)
+    miny,maxy=int(min(yA,yB,0)-2),int(max(yA,yB,0)+2)z
     
     plt.gca().set_xlim(minx,maxx)
     plt.gca().set_ylim(miny,maxy)
