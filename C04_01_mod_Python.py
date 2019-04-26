@@ -23,10 +23,10 @@ def input_coord(point):
         try :
             return tuple([float(i) for i in coord_txt.split(";")])
         except :
-            print("unable to convert data to float")
+            print("Unable to convert data to float... Try again ...")
             return input_coord(point)
     except :
-        print("something wrong happened...")
+        print("Something wrong happened... Try again !")
         return input_coord(point)
 
 def Trace_droite(xA,yA,xB,yB,place=True):
@@ -43,9 +43,11 @@ def Trace_droite(xA,yA,xB,yB,place=True):
     plt.gca().set_ylim(miny,maxy)
     plt.xticks(np.arange(minx,maxx,1))
     plt.yticks(np.arange(miny,maxy,1))
-    ax.grid(color='b', linestyle='-', linewidth=1)
+    ax.grid(color='b', linestyle='--', linewidth=1)
     ax.spines['left'].set_position('zero')
     ax.spines['bottom'].set_position('zero')
+    ax.spines['left'].set_linewidth(3.0)
+    ax.spines['bottom'].set_linewidth(3.0)
     ax.spines['right'].set_color('none')
     ax.spines['top'].set_color('none')
     ax.xaxis.set_ticks_position('bottom')
